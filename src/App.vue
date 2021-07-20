@@ -8,9 +8,10 @@
           <h1 class="title">Choose your modal:</h1>
           <button class="btn btnPrimary" @click="modalFirst = !modalFirst">First Modal</button>
           <button class="btn btnPrimary" @click="modalSecond.show = !modalSecond.show">Second Modal</button>
+          <button class="btn btnPrimary" @click="modalValidate = !modalValidate">Third Modal</button>
 
           <!-- first-modal -->
-          <Modals
+          <Modal
             v-show="modalFirst"
             title="First modal"
             @close="modalFirst = false"
@@ -22,10 +23,10 @@
               <br>
               <button class="btn btnPrimary" @click="modalFirst = !modalFirst">Close</button>
             </div>
-          </Modals>
+          </Modal>
 
           <!-- second-modal -->
-          <Modals
+          <Modal
             v-show="modalSecond.show"
             title="Second modal with form"
             @close="modalSecond = false"
@@ -42,8 +43,13 @@
               <br>
               <br>
             </div>
-          </Modals>
+          </Modal>
 
+          <!-- third-modal -->
+          <ModalValidate
+            v-show="modalValidate"
+            @close="modalValidate = false"
+          />
         </div>
       </section>
 
@@ -52,10 +58,13 @@
 </template>
 
 <script>
-import Modals from '@/components/Modal.vue'
+import Modal from '@/components/UI/Modal.vue'
+import ModalValidate from '@/components/UI/ModalValidate.vue'
 
 export default {
-  components: { Modals },
+  components: {
+    Modal, ModalValidate
+  },
   data () {
     return {
       modalFirst: false,
@@ -63,7 +72,8 @@ export default {
         show: false,
         name: '',
         email: ''
-      }
+      },
+      modalValidate: false
     }
   },
   methods: {
